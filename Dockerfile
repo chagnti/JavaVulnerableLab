@@ -1,5 +1,5 @@
 # Stage 1: Build Stage
-FROM openjdk:8 as build
+FROM eclipse-temurin:8-jdk AS build
 
 WORKDIR /app
 
