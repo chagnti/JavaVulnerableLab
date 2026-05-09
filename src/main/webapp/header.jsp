@@ -70,6 +70,7 @@
 							<li> <a href="<%=path%>/vulnerability/xss/xss2.jsp">Challenge 2</a></li>
 							<li> <a href="<%=path%>/vulnerability/xss/xss3.jsp">Challenge 3</a></li>
 							<li> <a href="<%=path%>/vulnerability/xss/xss4.jsp">Challenge 4</a></li>
+							<li> <a href="<%=path%>/vulnerability/xss/xss5.jsp">Challenge 5</a></li>
 					       	 </ul>
 					       </li>
 						
