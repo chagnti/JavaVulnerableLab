@@ -24,12 +24,15 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: java
-          queries: security-extended
+          config-file: ./.github/codeql/codeql-config.yml
 
       - name: Auto-build
         uses: github/codeql-action/autobuild@v3
+        with:
+          build-command: mvn clean package -DskipTests -Dmaven.compiler.source=8 -Dmaven.compiler.target=8
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:java"
+          upload: true

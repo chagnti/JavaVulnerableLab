@@ -1,0 +1,11 @@
+name: "JavaVulnerableLab CodeQL Config"
+
+queries:
+  - uses: security-extended
+  - uses: ./.github/codeql/SqlInjectionCustom.ql
+
+paths-ignore:
+  - "src/test/**"
+  - "src/main/webapp/WEB-INF/**"
+  - "**/target/**"
+  - "**/*.min.js"
