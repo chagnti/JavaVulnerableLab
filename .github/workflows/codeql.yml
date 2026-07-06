@@ -6,33 +6,19 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    - cron: '0 6 * * 1'   # weekly Monday scan
+    - cron: '0 6 * * 1'
 
 jobs:
-  analyze:
-    name: Analyze (java)
-    runs-on: ubuntu-latest
+  codeql:
+    uses: chagnti/appsec-codeql-central/.github/workflows/reusable-codeql.yml@main
+    with:
+      language: java
+      config-file: .github/codeql/codeql-config.yml
+      build-command: mvn clean package -DskipTests -Dmaven.compiler.source=8 -Dmaven.compiler.target=8
+      ram: 2048
+      threads: 2
+      upload-artifact: true
     permissions:
       security-events: write
       actions: read
       contents: read
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: java
-          config-file: ./.github/codeql/codeql-config.yml
-
-      - name: Auto-build
-        uses: github/codeql-action/autobuild@v3
-        with:
-          build-command: mvn clean package -DskipTests -Dmaven.compiler.source=8 -Dmaven.compiler.target=8
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-        with:
-          category: "/language:java"
-          upload: true
